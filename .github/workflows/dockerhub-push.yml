@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     tags:
-      - 'v*.*.*'
+      - 'main'
 
 jobs:
   build-push:
@@ -27,7 +27,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ${{ secrets.DOCKER_USERNAME }}/docker-ci-app
+        images: ${{ secrets.DOCKER_USERNAME }}/deepshikhadubey17
         tags: |
           type=ref,event=branch
           type=semver,pattern={{version}}
