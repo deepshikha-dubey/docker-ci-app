@@ -1,0 +1,21 @@
+name: Cleanup Old Images
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    
+    steps:
+    - name: Delete old GHCR images
+      uses: actions/delete-package-versions@v5
+      with:
+        package-name: 'docker-ci-app'
+        package-type: 'container'
+        min-versions-to-keep: 10
+        delete-only-untagged-versions: 'true'
